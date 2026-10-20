@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>What the Renewal Agent knows about one renewal. One current brief per opportunity; older versions are kept.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <label>Renewal Brief</label>
+    <nameField>
+        <displayFormat>RB-{0000}</displayFormat>
+        <label>Renewal Brief Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Renewal Briefs</pluralLabel>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

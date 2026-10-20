@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Left_Company__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Set when the person has left the customer.</description>
+    <label>Left Company</label>
+    <type>Checkbox</type>
+</CustomField>

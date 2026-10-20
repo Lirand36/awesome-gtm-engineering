@@ -1,0 +1,33 @@
+<template>
+    <lightning-modal-header label={action.Title__c}>
+        <p class="slds-text-body_small slds-text-color_weak">{owner}</p>
+    </lightning-modal-header>
+    <lightning-modal-body>
+        <template lwc:if={action.Reason__c}>
+            <p class="slds-m-bottom_small"><strong>Why:</strong> {action.Reason__c}</p>
+        </template>
+        <template lwc:if={dismissing}>
+            <lightning-textarea label="Why are you dismissing this?" value={reason} onchange={handleReason} required
+                placeholder="For example: already done by phone, or the contact is wrong"></lightning-textarea>
+        </template>
+        <template lwc:else>
+            <template lwc:if={hasDraft}>
+                <lightning-textarea label="Draft · edit before you approve" value={draft} onchange={handleDraft} class="draft"></lightning-textarea>
+            </template>
+            <p class="slds-m-top_small slds-text-body_small slds-text-color_weak">
+                Approving lets the agent carry this out, for example by saving an email as a draft in your inbox. Nothing is sent to the customer from here.
+            </p>
+        </template>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <template lwc:if={dismissing}>
+            <lightning-button label="Back" onclick={showApprove} class="slds-m-right_x-small"></lightning-button>
+            <lightning-button label="Dismiss the step" variant="destructive" onclick={handleDismiss} disabled={reasonMissing}></lightning-button>
+        </template>
+        <template lwc:else>
+            <lightning-button label="Dismiss" variant="base" onclick={showDismiss} class="slds-m-right_medium"></lightning-button>
+            <lightning-button label="Not now" onclick={handleCancel} class="slds-m-right_x-small"></lightning-button>
+            <lightning-button label="Approve" variant="brand" onclick={handleApprove}></lightning-button>
+        </template>
+    </lightning-modal-footer>
+</template>

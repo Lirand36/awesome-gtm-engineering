@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sources_Note__c</fullName>
+    <description>e.g. "23 Gong calls, ChurnZero and Salesforce"</description>
+    <label>Sources</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+</CustomField>

@@ -1,0 +1,154 @@
+<template>
+    <article class="slds-card brief">
+        <template lwc:if={error}>
+            <div class="slds-p-around_medium slds-text-color_error">{error}</div>
+        </template>
+
+        <template lwc:elseif={loaded}>
+            <!-- Header: who, how much, when, and the state in one paragraph -->
+            <header class="brief-head">
+                <div class="eyebrow">
+                    <lightning-icon icon-name="utility:einstein" size="x-small" class="agent-icon"></lightning-icon>
+                    <span>Renewal Brief</span>
+                    <template lwc:if={headline.risk}><span class={headline.riskClass}>{headline.risk}</span></template>
+                </div>
+                <h2 class="account">{headline.account}</h2>
+                <p class="facts">
+                    <strong>{headline.arr} ARR</strong> · {headline.renewal} <span class="muted">{headline.days}</span>
+                    <template lwc:if={headline.tier}> · {headline.tier}</template>
+                    · {headline.stage}
+                </p>
+                <p class="facts muted">AE {headline.ae} · CSM {headline.csm}</p>
+                <template lwc:if={hasBrief}>
+                    <p class="summary">{summary}</p>
+                    <p class="updated">{headline.updated}</p>
+                </template>
+                <template lwc:else>
+                    <p class="summary muted">The Renewal Agent hasn't written a brief for this renewal yet. It appears here after the next run.</p>
+                </template>
+            </header>
+
+            <div class="slds-grid slds-wrap slds-gutters_small body">
+                <!-- Main column -->
+                <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-3">
+                    <section class="section">
+                        <div class="section-head"><h3>The plan</h3><span class="label">{planCount}</span></div>
+                        <template lwc:if={hasPlan}>
+                            <template for:each={plan} for:item="step">
+                                <div key={step.id} class={step.rowClass}>
+                                    <div class="plan-text">
+                                        <p class="plan-title">{step.title}</p>
+                                        <template lwc:if={step.reason}><p class="muted">{step.reason}</p></template>
+                                        <template lwc:if={step.prepared}>
+                                            <p class="prepared"><lightning-icon icon-name="utility:file" size="xx-small"></lightning-icon> {step.prepared}</p>
+                                        </template>
+                                        <p class="small muted">{step.owner} {step.due}</p>
+                                    </div>
+                                    <div class="plan-act">
+                                        <template lwc:if={step.open}>
+                                            <lightning-button label={step.buttonLabel} variant={step.variant} data-id={step.id} onclick={handleReview} disabled={busy}></lightning-button>
+                                        </template>
+                                        <template lwc:else>
+                                            <span class="done"><lightning-icon icon-name="utility:check" size="xx-small" variant="success"></lightning-icon> {step.doneLabel}</span>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                        <template lwc:else><p class="muted">No steps proposed yet.</p></template>
+                    </section>
+
+                    <section class="section">
+                        <div class="section-head"><h3>What changed</h3><span class="label">Latest signals</span></div>
+                        <template lwc:if={hasSignals}>
+                            <template for:each={signals} for:item="s">
+                                <div key={s.id} class={s.rowClass}>
+                                    <span class="when">{s.when}</span>
+                                    <div class="signal-text">
+                                        <p><strong>{s.headline}</strong> {s.detail}</p>
+                                        <template lwc:if={s.quote}><p class="quote">"{s.quote}" <span class="small">{s.quoteBy}</span></p></template>
+                                    </div>
+                                    <template lwc:if={s.url}>
+                                        <a class={s.sourceClass} href={s.url} target="_blank" rel="noopener">{s.source}</a>
+                                    </template>
+                                    <template lwc:else><span class={s.sourceClass}>{s.source}</span></template>
+                                </div>
+                            </template>
+                        </template>
+                        <template lwc:else><p class="muted">Nothing new.</p></template>
+                    </section>
+
+                    <template lwc:if={value}>
+                        <section class="section">
+                            <div class="section-head"><h3>Value delivered</h3><span class="label">For the EBR</span></div>
+                            <p class="value-num">{value.annual} <span class="small muted">estimated a year</span></p>
+                            <p>{value.text}</p>
+                        </section>
+                    </template>
+                </div>
+
+                <!-- Side column -->
+                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3">
+                    <section class="section">
+                        <div class="section-head"><h3>Forecast</h3></div>
+                        <div class="forecast">
+                            <div>
+                                <p class="label">Agent</p>
+                                <p class={forecast.agentClass}>{forecast.agent}</p>
+                                <p class="small muted">{forecast.likelihood}</p>
+                                <p class="small muted">{forecast.expected}</p>
+                            </div>
+                            <div>
+                                <p class="label">Your call</p>
+                                <p class="big">{forecast.mine}</p>
+                            </div>
+                        </div>
+                        <template lwc:if={forecast.disagree}>
+                            <p class="warn-line"><lightning-icon icon-name="utility:warning" size="xx-small" variant="warning"></lightning-icon> You and the agent disagree. This renewal will come up on the forecast call.</p>
+                        </template>
+                        <div class="call-edit">
+                            <lightning-combobox label="Update your call" options={callOptions} value={myCall} onchange={handleCallChange} variant="label-stacked"></lightning-combobox>
+                            <lightning-button label="Save" onclick={handleCallSave} disabled={callUnchanged}></lightning-button>
+                        </div>
+                    </section>
+
+                    <section class="section">
+                        <div class="section-head"><h3>Buying committee</h3></div>
+                        <template lwc:if={hasCommittee}>
+                            <template for:each={committee} for:item="p">
+                                <div key={p.id} class="person">
+                                    <span class="avatar">{p.initials}</span>
+                                    <div class="person-text">
+                                        <p class={p.nameClass}>{p.name}</p>
+                                        <p class="small muted">{p.line}</p>
+                                        <template lwc:if={p.note}><p class="small muted">{p.note}</p></template>
+                                    </div>
+                                    <template lwc:if={p.status}><span class={p.badgeClass}>{p.status}</span></template>
+                                </div>
+                            </template>
+                            <template lwc:if={singleThreaded}><p class="warn-line small">{singleThreaded}</p></template>
+                        </template>
+                        <template lwc:else><p class="muted">Add contact roles to this opportunity to see the committee.</p></template>
+                    </section>
+
+                    <template lwc:if={hasMilestones}>
+                        <section class="section">
+                            <div class="section-head"><h3>Playbook milestones</h3></div>
+                            <template for:each={milestones} for:item="m">
+                                <div key={m.id} class="milestone">
+                                    <span class="when">{m.when}</span>
+                                    <span class="milestone-title">{m.title} <span class="small muted">{m.due}</span></span>
+                                    <template lwc:if={m.done}><lightning-icon icon-name="utility:check" size="xx-small" variant="success" alternative-text="Done"></lightning-icon></template>
+                                </div>
+                            </template>
+                        </section>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+        <template lwc:else>
+            <div class="slds-p-around_medium"><lightning-spinner alternative-text="Loading the brief" size="small"></lightning-spinner></div>
+        </template>
+    </article>
+</template>

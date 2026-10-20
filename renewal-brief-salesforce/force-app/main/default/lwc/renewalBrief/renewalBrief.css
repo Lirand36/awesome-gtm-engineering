@@ -1,0 +1,258 @@
+/* Salesforce look (SLDS styling hooks), with the brief's structure: a summary first, then the plan. */
+.brief {
+    padding: 1rem 1.25rem 0.5rem;
+}
+.brief-head {
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--slds-g-color-neutral-base-10, #181818);
+}
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--slds-g-color-neutral-base-30, #444);
+}
+.agent-icon {
+    --slds-c-icon-color-foreground-default: var(--slds-g-color-brand-base-50, #0176d3);
+}
+.account {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0.25rem 0 0.25rem;
+}
+.facts {
+    font-size: 0.875rem;
+}
+.summary {
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    margin-top: 0.75rem;
+    max-width: 72ch;
+}
+.updated {
+    margin-top: 0.375rem;
+    font-size: 0.75rem;
+    color: var(--slds-g-color-neutral-base-50, #747474);
+}
+.body {
+    padding-top: 1rem;
+}
+.section {
+    margin-bottom: 1.5rem;
+}
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding-bottom: 0.375rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--slds-g-color-neutral-base-10, #181818);
+}
+.section-head h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+.label {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--slds-g-color-neutral-base-50, #747474);
+}
+.muted {
+    color: var(--slds-g-color-neutral-base-50, #747474);
+}
+.small {
+    font-size: 0.75rem;
+}
+
+/* plan */
+.plan-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0 0.75rem 0.75rem;
+    border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+    border-left: 3px solid var(--edge, #2e844a);
+}
+.plan-row_bad { --edge: var(--slds-g-color-error-base-40, #ba0517); }
+.plan-row_warn { --edge: var(--slds-g-color-warning-base-60, #dd7a01); }
+.plan-row_calm { --edge: var(--slds-g-color-success-base-50, #2e844a); }
+.plan-row_done { opacity: 0.7; }
+.plan-text {
+    min-width: 0;
+}
+.plan-title {
+    font-weight: 600;
+    font-size: 0.9375rem;
+}
+.prepared {
+    margin-top: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--slds-g-color-brand-base-50, #0176d3);
+}
+.plan-act {
+    flex: none;
+}
+.done {
+    font-size: 0.8125rem;
+    color: var(--slds-g-color-success-base-50, #2e844a);
+    font-weight: 600;
+}
+
+/* signals */
+.signal {
+    display: grid;
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+    font-size: 0.875rem;
+}
+.when {
+    font-size: 0.75rem;
+    color: var(--slds-g-color-neutral-base-50, #747474);
+    padding-top: 0.125rem;
+    white-space: nowrap;
+}
+.signal-text {
+    min-width: 0;
+}
+.quote {
+    margin-top: 0.125rem;
+    color: var(--slds-g-color-neutral-base-30, #444);
+    font-style: italic;
+}
+.source {
+    font-size: 0.6875rem;
+    border: 1px solid var(--slds-g-color-border-base-4, #c9c9c9);
+    border-radius: 0.25rem;
+    padding: 0 0.375rem;
+    height: fit-content;
+    white-space: nowrap;
+    color: var(--slds-g-color-neutral-base-30, #444);
+}
+.value-num {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* forecast */
+.forecast {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--slds-g-color-border-base-4, #c9c9c9);
+    border-radius: 0.25rem;
+}
+.forecast > div {
+    padding: 0.625rem 0.75rem;
+}
+.forecast > div + div {
+    border-left: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+.big {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0.125rem 0;
+}
+.tone_good { color: var(--slds-g-color-success-base-50, #2e844a); }
+.tone_warn { color: var(--slds-g-color-warning-base-60, #a96404); }
+.tone_bad { color: var(--slds-g-color-error-base-40, #ba0517); }
+.warn-line {
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    display: flex;
+    gap: 0.375rem;
+    align-items: flex-start;
+}
+.call-edit {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+    margin-top: 0.75rem;
+}
+.call-edit lightning-combobox {
+    flex: 1;
+}
+
+/* committee */
+.person {
+    display: flex;
+    gap: 0.625rem;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+}
+.person-text {
+    flex: 1;
+    min-width: 0;
+}
+.avatar {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    background: var(--slds-g-color-neutral-base-95, #f3f3f3);
+    flex: none;
+}
+.person-name {
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+.person-name_gone {
+    text-decoration: line-through;
+    color: var(--slds-g-color-neutral-base-50, #747474);
+}
+
+/* status: a dot and text; only "needs attention" is filled */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-transform: none;
+    letter-spacing: 0;
+}
+.badge::before {
+    content: '';
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 50%;
+    background: var(--dot, #747474);
+}
+.badge_good { --dot: var(--slds-g-color-success-base-50, #2e844a); }
+.badge_warn { --dot: var(--slds-g-color-warning-base-60, #dd7a01); }
+.badge_neutral { --dot: var(--slds-g-color-neutral-base-60, #939393); }
+.badge_bad {
+    --dot: var(--slds-g-color-error-base-40, #ba0517);
+    color: var(--slds-g-color-error-base-40, #ba0517);
+    background: var(--slds-g-color-error-base-95, #fef1ee);
+    padding: 0.0625rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+/* milestones */
+.milestone {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.375rem 0;
+    border-bottom: 1px solid var(--slds-g-color-border-base-1, #e5e5e5);
+    font-size: 0.8125rem;
+}
+
+.slds-p-around_medium {
+    position: relative;
+    min-height: 4rem;
+}

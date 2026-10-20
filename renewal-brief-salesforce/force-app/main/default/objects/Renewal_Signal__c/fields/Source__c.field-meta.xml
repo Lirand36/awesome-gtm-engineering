@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source__c</fullName>
+    <label>Source</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+                <value>
+                    <fullName>Gong</fullName>
+                    <default>false</default>
+                    <label>Gong</label>
+                </value>
+                <value>
+                    <fullName>ChurnZero</fullName>
+                    <default>false</default>
+                    <label>ChurnZero</label>
+                </value>
+                <value>
+                    <fullName>Salesforce</fullName>
+                    <default>false</default>
+                    <label>Salesforce</label>
+                </value>
+                <value>
+                    <fullName>Clay</fullName>
+                    <default>false</default>
+                    <label>Clay</label>
+                </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
